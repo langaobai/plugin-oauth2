@@ -3,7 +3,7 @@ kind: Role
 metadata:
   name: plugin-oauth-role-template
   labels:
-    halo.run/hidden: "true"
+    halo.run/hidden: "false"
     halo.run/role-template: "true"
     rbac.authorization.halo.run/aggregate-to-authenticated: "true"
   annotations:
@@ -12,5 +12,9 @@ metadata:
 rules:
   - apiGroups: [ "api.plugin.halo.run" ]
     resourceNames: [ "plugin-oauth2" ]
-    resources: [ "plugins/connect", "plugins/disconnect" ]
-    verbs: [ "get", "list", "update" ]
+    resources: [ "plugins/connect", "plugins/disconnect","plugins/wechat/checkMsg"]
+    verbs: [ "create", "get","list", "update" ]
+  - nonResourceURLs: [ "/apis/api.plugin.halo.run/v1alpha1/plugins/plugin-oauth2/loginQrCode" , "/apis/api.plugin.halo.run/v1alpha1/plugins/plugin-oauth2/userLogin" , "/apis/api.plugin.halo.run/v1alpha1/plugins/plugin-oauth2/wechat/check"]
+    verbs: ["get","update" ]
+#  - nonResourceURLs: [ "/apis/api.plugin.halo.run/v1alpha1/plugins/plugin-oauth2/wechat/checkMsg" ]
+#    verbs: ["create"]

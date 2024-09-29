@@ -1,12 +1,33 @@
 apiVersion: auth.halo.run/v1alpha1
 kind: AuthProvider
 metadata:
+  name: wechatmp
+  labels:
+    auth.halo.run/auth-binding: "true"
+spec:
+  displayName: 微信公众号
+  description: 微信公众号授权登陆
+  logo: /plugins/plugin-oauth2/assets/static/wechat.svg
+  website: https://mp.weixin.qq.com/
+  helpPage: https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Access_Overview.html
+  authenticationUrl: https://mp.weixin.qq.com/
+  bindingUrl: /apis/api.plugin.halo.run/v1alpha1/plugins/plugin-oauth2/connect/github
+  unbindUrl: /apis/api.plugin.halo.run/v1alpha1/plugins/plugin-oauth2/disconnect/github
+  settingRef:
+    name: generic-oauth2-setting
+    group: genericOauth
+  configMapRef:
+    name: oauth2-wechatmp-config
+---
+apiVersion: auth.halo.run/v1alpha1
+kind: AuthProvider
+metadata:
   name: github
   labels:
     auth.halo.run/auth-binding: "true"
 spec:
   displayName: GitHub
-  description: GitHub Inc. is an Internet hosting service for software development and version control using Git.
+  description: GitHub Inc. 是一种使用 Git 进行软件开发和版本控制的 Internet 托管服务。
   logo: /plugins/plugin-oauth2/assets/static/github.svg
   website: https://github.com
   helpPage: https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app
@@ -27,7 +48,7 @@ metadata:
     auth.halo.run/auth-binding: "true"
 spec:
   displayName: Gitee
-  description: Gitee is an online forge that allows software version control using Git and is intended primarily for the hosting of open source software.
+  description: Gitee 是一个在线伪造，允许使用 Git 进行软件版本控制，主要用于托管开源软件.
   logo: /plugins/plugin-oauth2/assets/static/gitee.svg
   website: https://gitee.com
   authenticationUrl: /oauth2/authorization/gitee
@@ -47,7 +68,7 @@ metadata:
     auth.halo.run/auth-binding: "true"
 spec:
   displayName: GitLab
-  description: GitLab Inc. is an open-core company that operates GitLab, a DevOps software package which can develop, secure, and operate software.
+  description: GitLab Inc. 是一家运营 GitLab 的开放核心公司，GitLab 是一个可以开发、保护和运营软件的 DevOps 软件包.
   logo: /plugins/plugin-oauth2/assets/static/gitlab.svg
   website: https://gitlab.com
   authenticationUrl: /oauth2/authorization/gitlab
